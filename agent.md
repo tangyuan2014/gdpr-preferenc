@@ -4,6 +4,34 @@ Short goal
 
 - Make small, safe changes to this Dockerized Vite+Vue frontend and the demo Node API that demonstrates GDPR operations on user data. Keep edits minimal and low-risk unless the user explicitly asks for larger changes.
 
+Recent changes (important)
+
+- This repository was converted to use pnpm. A `.npmrc` was added recommending `pnpm@10.21.0` and `server/pnpm-lock.yaml` was committed. Use Corepack to enable pnpm or install pnpm globally.
+- Vite now includes `@vitejs/plugin-vue` and a `vite.config.js` file was added so `.vue` files are parsed correctly in dev.
+
+Quick pnpm dev commands (PowerShell)
+
+```powershell
+# enable corepack and activate pnpm
+corepack enable
+corepack prepare pnpm@latest --activate
+
+# install deps
+pnpm install
+cd server
+pnpm install
+cd ..
+
+# start API (in its own terminal)
+cd server
+pnpm run start
+
+# start frontend (in a separate terminal)
+cd ..
+$env:VITE_API_URL = 'http://localhost:4000'
+pnpm run dev
+```
+
 Primary files to read first (in order)
 
 - `README.md` — project overview, GDPR intent, and curl examples (single best place to start).
