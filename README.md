@@ -22,6 +22,42 @@ make logs
 make down
 ```
 
+Development (local, without Docker)
+
+If you prefer to run the app locally (no Docker), follow these steps. We recommend using pnpm (Corepack) but npm works too.
+
+1. Enable Corepack and activate pnpm (recommended):
+
+```powershell
+corepack enable
+corepack prepare pnpm@latest --activate
+pnpm --version
+```
+
+2. Install dependencies and start services:
+
+```powershell
+# install root deps
+pnpm install
+
+# install API deps
+cd server
+pnpm install
+cd ..
+
+# start API (port 4000)
+cd server
+pnpm run start
+
+# in a separate terminal: start frontend (Vite) and point it at API
+cd ..
+$env:VITE_API_URL = 'http://localhost:4000'
+pnpm run dev
+```
+
+If you don't want to use pnpm, replace `pnpm` with `npm` in the commands above. To use pnpm via Corepack in CI, enable Corepack in your pipeline and prepare pnpm as above.
+
+
 Direct Compose commands:
 
 ```bash
